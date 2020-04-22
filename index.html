@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-modelを使わないで入力値を反映させる</title>
+    <style>
+        .module+.module {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="module">
+            v-modelで入力値が反映される例<br>
+            <input type="text" v-model="data1">
+            <br><br>
+            ここに入力値が表示されます→{{ data1 }}</div>
+        <div class="module">
+            入力後エンターかボタンクリックでデータを反映させる例<br>
+            <input type="text" v-bind="data2" ref="input" v-on:keyup.enter="submitText"><button
+                v-on:click="submitText">クリックすると反映します</button>
+            <br><br>
+            ここに入力値が表示されます→{{ data2 }}</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                data1: '',
+                data2: ''
+            },
+            methods: {
+                submitText() {
+                    this.data2 = this.$refs.input.value;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
